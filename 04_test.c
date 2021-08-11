@@ -9,14 +9,12 @@ int main()
         initscr();                      /* Start curses mode              */
         curs_set (0);
 	getmaxyx (stdscr, row, col);
-	while (1) {
-		for (int i = 0; i < row; i++) {
-      		move (i, (col - strlen (mes)) / 2);
-		printw("%s",mes);
-        	refresh();
-        	usleep( 80000 );
-		clear ();
-		}
+	for (int i = 0; i < row; i++) {
+      	move (row + i, (col - strlen (mes)) / 2);
+	printw("%s %4d",mes);
+        refresh();
+        usleep( 150000 );
+	clear ();
 	}
         getch();                        /* Wait for user input */
         endwin();                       /* End curses mode                */
