@@ -2,16 +2,18 @@
 #include <string.h>
 #include <unistd.h>
 
-void typewriter (char mes[], int row, int col);
+void errtypewriter (char mes[], int row, int col);
 
 int main()
 {       
 	int row, col;
-	char mes [] = "Knock-knock, Neo. Follow the White Rabbit.";
-        initscr();              
+	char mes1 [] = "Knock-knock, Neo.";
+        char mes2 [] = "Follow the White Rabbit...";
+	initscr();              
         curs_set (1);
 	getmaxyx (stdscr, row, col);
-	typewriter (mes, row/2, (col - strlen (mes)) / 2);
+	errtypewriter (mes1, row/2, (col - strlen (mes1)) / 2);
+	errtypewriter (mes2, row/2 + 1, (col - strlen (mes1)) / 2);
 	//clear ();
         getch();                      
         endwin();  
@@ -19,16 +21,16 @@ int main()
         return 0;
 }
 
-void typewriter (char mes [], int row, int col) {
+void errtypewriter (char mes [], int row, int col) {
 	
 	for (int i = 0; i < strlen (mes); i++) {
 		move (row, col + i);
-		if (i % 14 == 0 && i != 0 ) {
+		if (i == strlen (mes) / 3 ) {
 			printw("%c",mes [i-4]);
 			refresh ();
                 	move (row, col + i + 1);
 			usleep( 250000 );
-			printw("%c",mes [i+5]);
+			printw("%c",mes [i-2]);
                         refresh ();
                         usleep( 850000 );
 			printw("\b \b");
