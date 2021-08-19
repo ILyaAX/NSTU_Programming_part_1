@@ -8,33 +8,29 @@ void typewriter (char mes [], int row, int col);
 
 int main()
 {       
-	int row, col;
+	//int row, col;
 	char mes1 [] = "Wake up, Neo!";
         char mes2 [] = "Follow the white rabbit...";
 	char mes3 [] = "Knock, knock";
 	initscr();	
         curs_set (1);
-	getmaxyx (stdscr, row, col);
-	move ( row/2, (col - strlen (mes1)) / 2);
+	start_color();
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	attron(COLOR_PAIR(1));
+	//getmaxyx (stdscr, row, col);
+	move ( 6, 20);
 	refresh ();
-	//printw (" ");
-	//for (int i = 0; i < 7; i++) {
-	//	curs_set (1);
-	//	usleep (500000);
-	//	curs_set (0);
-        //        usleep (500000);
-	//}
-	//curs_set (1);
 	usleep (3000000);	
-	typewriter (mes1, row/2, (col - strlen (mes1)) / 2);
+	typewriter (mes1, 6, 20);
 	refresh ();
 	usleep (3000000);
 	clear ();
-	errtypewriter (mes2, row/2, (col - strlen (mes1)) / 2, 15);
+	errtypewriter (mes2, 6, 20, 15);
 	usleep (3000000); 
-	typewriter (mes3, row/2 + 1, (col - strlen (mes1)) / 2);
+	typewriter (mes3, 7, 20);
         curs_set (0);
-	getch();                      
+	getch();
+	attroff(COLOR_PAIR(1));	
         endwin();  
         
         return 0;
