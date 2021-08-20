@@ -47,18 +47,35 @@ int main() {
 }
 
 void sorting_choice(int A[], int n) {
-    for (int i = 0; i < n; i++) {
-        int i_min = i;
-        int j;
-        for (j = i; j < n; j++) {
-            i_min = A[j] < A[i_min] ? j : i_min;
-            }
-        int tmp = A[i_min];
-        for (j = i_min; j > i - 1; j--) {
-            A[j] = A[j - 1];
-        }
-        A[i] = tmp;
-    }
+	for (int i = 0; i < n; i++) {
+        	int i_min = i;
+        	int j;
+		int col_zero = (COLS - n * 4) / 2;
+		int row_zero = LINES / 2;
+        	for (j = i; j < n; j++) {
+            		attron(COLOR_PAIR(3));
+			mvprintw (row_zero, col_zero + i_min * 4, "    ");
+			mvprintw (row_zero - 2, col_zero + i_min * 4, "%4d", A [i_min]);
+			refresh ();
+			usleep (500000);
+			mvprintw (row_zero, col_zero + j * 4, "    ");
+                        mvprintw (row_zero - 2, col_zero + j * 4, "%4d", A [j]);
+                        refresh ();
+                        usleep (500000);
+			if (A [j] < A [i_min]) {
+	    			i_min = j;
+			}		
+			else {
+			
+			}
+	    
+	    	}	
+        	int tmp = A[i_min];
+        	for (j = i_min; j > i - 1; j--) {
+           	A[j] = A[j - 1];
+        	}
+        	A[i] = tmp;
+    	}
 }
 
 
