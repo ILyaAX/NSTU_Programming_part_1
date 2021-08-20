@@ -53,7 +53,6 @@ void sorting_choice(int A[], int n) {
 		int col_zero = (COLS - n * 4) / 2;
 		int row_zero = LINES / 2;
         	for (j = i; j < n; j++) {
-            		attron(COLOR_PAIR(3));
 			mvprintw (row_zero, col_zero + i_min * 4, "    ");
 			mvprintw (row_zero - 2, col_zero + i_min * 4, "%4d", A [i_min]);
 			refresh ();
@@ -63,7 +62,8 @@ void sorting_choice(int A[], int n) {
                         refresh ();
                         usleep (500000);
 			if (A [j] < A [i_min]) {
-	    			i_min = j;
+	    			mvprintw (row_zero, col_zero + i_min * 4, "%4d", A [i_min]);
+				i_min = j;
 			}		
 			else {
 			
