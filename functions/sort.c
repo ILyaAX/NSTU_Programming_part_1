@@ -47,7 +47,7 @@ int main() {
 }
 
 void sorting_choice(int A[], int n) {
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n - 1; i++) {
         	int i_min = i;
         	int j;
 		int col_zero = (COLS - n * 4) / 2;
@@ -63,18 +63,45 @@ void sorting_choice(int A[], int n) {
                         usleep (500000);
 			if (A [j] < A [i_min]) {
 	    			mvprintw (row_zero, col_zero + i_min * 4, "%4d", A [i_min]);
+				mvprintw (row_zero - 2, col_zero + i_min * 4, "    ");
+				refresh ();
 				i_min = j;
+				mvprintw (row_zero - 2, col_zero + i_min * 4, "%4d", A [i_min]);
+				mvprintw (row_zero, col_zero + i_min * 4, "    ");
+                                refresh ();
 			}		
 			else {
-			
+				mvprintw (row_zero - 2, col_zero + j * 4, "    ");
+                        	mvprintw (row_zero, col_zero + j * 4, "%4d", A [j]);
 			}
 	    
 	    	}	
         	int tmp = A[i_min];
-        	for (j = i_min; j > i - 1; j--) {
-           	A[j] = A[j - 1];
+        	for (j = i_min; j > i; j--) {
+           	
+			mvprintw (row_zero, col_zero + (j - 1) * 4, "    ");
+			usleep (500000);
+                        mvprintw (row_zero, col_zero + j  * 4, "%4d", A [j - 1]);
+                        refresh ();
+                        usleep (500000);
+			A[j] = A[j - 1];
+
         	}
-        	A[i] = tmp;
+        	for (int k = i_min * 4; k > i * 4; k--)	{
+			mvprintw (row_zero - 2, col_zero + k, "%4d    ", tmp);
+                        refresh ();
+			usleep (100000);
+		}
+		
+		mvprintw (row_zero - 2, col_zero + i * 4, "    ");
+		mvprintw (row_zero - 1, col_zero + i * 4, "%4d", tmp);
+		refresh ();
+                usleep (250000);
+		mvprintw (row_zero - 1, col_zero + i * 4, "    ");
+                mvprintw (row_zero, col_zero + i * 4, "%4d", tmp);
+                refresh ();
+                usleep (250000);
+		A[i] = tmp;
     	}
 }
 
