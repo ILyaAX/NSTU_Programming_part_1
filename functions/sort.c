@@ -5,7 +5,7 @@
 #include <time.h>
 
 #define TIME 330000	// Отвечает за скорость воспроизведения
-#define SHIFT_ROW -6	// Смещение от центра печати массива
+#define SHIFT_ROW -4	// Смещение от центра экрана печати массива
                        
 			//-------------------------- Функции
 int init_array (int A[], int n);
@@ -22,11 +22,11 @@ int main() {
 
                         //--------------- Инициализация цветовых пар
         start_color();                    // Запуск цветового режима
-        init_pair(1, COLOR_CYAN, COLOR_BLACK);
-        init_pair(2, COLOR_GREEN, COLOR_BLACK);
-        init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-        init_pair(4, COLOR_RED, COLOR_BLACK);
-        attron(COLOR_PAIR(1));          // Установка базовой пары
+        init_pair (1, COLOR_CYAN, COLOR_BLACK);
+        init_pair (2, COLOR_GREEN, COLOR_BLACK);
+        init_pair (3, COLOR_YELLOW, COLOR_BLACK);
+        init_pair (4, COLOR_RED, COLOR_BLACK);
+	attron(COLOR_PAIR(1));          // Установка базовой пары
 
 	mvprintw (LINES / 2 + SHIFT_ROW, 10, "Введите количество элементов в массиве = ");
 	int n;	
@@ -124,6 +124,8 @@ void sorting_choice(int A[], int n) {
                 usleep (TIME);
 		A[i] = tmp;
 		attron (COLOR_PAIR(1));
+		shifts++;
+                mvprintw (LINES / 2 + 4, (COLS - 30) / 2, "Количество сдвигов = %d", shifts);
     	}
 	attron (COLOR_PAIR(2));
 	mvprintw (row_zero, col_zero + (n - 1) * 4, "%4d", A [n - 1]);
