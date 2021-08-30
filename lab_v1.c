@@ -1,41 +1,37 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include "stdlib.h"
 #include <time.h>
 
 #define N   16
 
-void sorting_choice(int A[], int n, int order);
+void sorting_choice (int A[], int n);
 void init_array (int A[], int n);
 void print_array (const int A[], int n);
 
 int main(void) {
     int   ARR[N];
-    int order;
     init_array (ARR, N);
     printf ("Elements in an array : \n");
     print_array (ARR, N);
-    printf("Sorting order? (Ascending/descending) = 1 or 0 : ");
-    scanf ("%d", &order);
-    sorting_choice(ARR, N, order);
+    sorting_choice(ARR, N);
     printf("Sorted array : \n");
     print_array (ARR, N);
     printf ("\n");
     return 0;
 }
 
-void sorting_choice(int A[], int n, int order) {
+void sorting_choice(int A[], int n) {
     for (int i = 0; i < N; i++) {
-        int index = i;
+        int i_min = i;
         int j;
         for (j = i; j < N; j++) {
-            if (order == 0) index = A[j] > A[index] ? j : index;
-            else index = A[j] < A[index] ? j : index;
-        }
-        int tmp = A[index];
-        for (j = index; j > i - 1; j--) {
+            i_min = A[j] < A[i_min] ? j : i_min;
+            }
+        int tmp = A[i_min];
+        for (j = i_min; j > i - 1; j--) {
             A[j] = A[j - 1];
         }
-            A[i] = tmp;
+        A[i] = tmp;
     }
 }
 

@@ -54,7 +54,8 @@ int main() {
 	attron (COLOR_PAIR(1) | A_BLINK);
 	mvprintw (LINES - 3, COLS - 45, "Для выхода нажмите любую клавишу >>> ");
     getch();
-	delwin(win_counters);
+	                    //--------------- Удаление окна counters
+    delwin(win_counters);
                         //--------------- Завершение режима ncurses
     endwin();
 
@@ -184,13 +185,13 @@ void intro (){
             wattron (intro, COLOR_PAIR(4));
             mvwprintw (intro, lines_intro / 2 - 5 + i, (cols_intro - 72) / 2, mes [i]);
             wrefresh (intro);
-            usleep (TIME);
+            usleep (TIME / 2);
             wattron (intro, COLOR_PAIR(1));
         }
         else {  
             mvwprintw (intro, lines_intro / 2 - 5 + i, (cols_intro - 72) / 2, mes [i]);
             wrefresh (intro);
-            usleep (TIME);
+            usleep (TIME / 2);
         }
     }
     usleep (TIME * 3);
